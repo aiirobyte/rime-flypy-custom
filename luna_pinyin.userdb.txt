@@ -1,0 +1,23 @@
+# Rime user dictionary
+#@/db_name	luna_pinyin.userdb
+#@/db_type	userdb
+#@/rime_version	1.5.3
+#@/tick	8
+#@/user_id	ab_pro14
+dan 	但	c=0 d=0.097531 t=8
+dan wo men 	但我們	c=1 d=0.980199 t=8
+de 	的	c=0 d=0.19459 t=8
+di fang 	地方	c=0 d=0.0960789 t=8
+hao 	好	c=0 d=0.0970446 t=8
+hen hao 	很好	c=0 d=0.0960789 t=8
+mei wen 	美文	c=0 d=0.0985112 t=8
+mei wen de 	美文的	c=1 d=0.99005 t=8
+shi 	是	c=0 d=0.193124 t=8
+wan er piao 	玩兒票	c=1 d=0.995012 t=8
+wo me de 	我麼的	c=1 d=0.985112 t=8
+wo men 	我們	c=0 d=0.290654 t=8
+wo men shi yi ge hao 	我們是一個好	c=1 d=0.97531 t=8
+wo men shi yi ge hen hao de di fang 	我們是一個很好的地方	c=2 d=1.93605 t=8
+wu wu wu 	嗚嗚嗚	c=0 d=0.0995012 t=8
+wu wu wu wu wu wu wu wu wu wu wu wu wu wu wu 	嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚	c=1 d=1 t=8
+yi ge 	一個	c=0 d=0.193124 t=8

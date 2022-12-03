@@ -1,0 +1,203 @@
+__build_info:
+  rime_version: 1.7.3
+  timestamps:
+    default: 1632134538
+    default.custom: 1670047880
+    double_pinyin_flypy.custom: 1662446572
+    double_pinyin_flypy.schema: 1658419336
+    grammar: 1642480344
+    grammar.custom: 1642480344
+    key_bindings: 1632128982
+    key_bindings.custom: 0
+    punctuation: 1632128982
+    punctuation.custom: 0
+custom_phrase:
+  db_class: stabledb
+  dictionary: ""
+  enable_completion: false
+  enable_sentence: false
+  initial_quality: 1
+  user_dict: custom_phrase
+emoji_suggestion:
+  opencc_config: emoji.json
+  option_name: emoji_suggestion
+engine:
+  filters:
+    - "simplifier@emoji_suggestion"
+    - simplifier
+    - uniquifier
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - script_translator
+    - "table_translator@custom_phrase"
+    - "table_translator@custom_phrase"
+grammar:
+  language: "zh-hant-t-essay-bgw"
+key_binder:
+  bindings:
+    - {accept: Tab, send: Right, when: composing}
+    - {accept: "Shift+Tab", send: Left, when: composing}
+    - {accept: minus, send: Page_Down, when: has_menu}
+    - {accept: equal, send: Page_Up, when: paging}
+    - {accept: bracketleft, send: Page_Down, when: has_menu}
+    - {accept: bracketright, send: Page_Up, when: paging}
+  import_preset: default
+menu:
+  page_size: 9
+punctuator:
+  full_shape:
+    " ": {commit: "　"}
+    "!": {commit: "！"}
+    "\"": {pair: ["“", "”"]}
+    "#": ["＃", "#", "⌘"]
+    "$": ["￥", "$", "€", "£", "¥", "¢", "¤"]
+    "%": ["％", "%", "°", "℃"]
+    "&": ["＆", "&"]
+    "'": {pair: ["‘", "’"]}
+    "(": "（"
+    ")": "）"
+    "*": ["＊", "*", "・", "×", "※", "❂", "·"]
+    "+": ["＋", "+"]
+    ",": {commit: "，"}
+    "-": ["－", "-"]
+    .: {commit: "。"}
+    "/": ["、", "／", "/", "÷"]
+    ":": "："
+    ";": {commit: "；"}
+    "<": ["《", "〈", "«", "‹"]
+    "=": ["＝", "="]
+    ">": ["》", "〉", "»", "›"]
+    "?": {commit: "？"}
+    "@": ["＠", "@", "☯"]
+    "[": ["「", "【", "〔", "［"]
+    "\\": ["、", "＼", "\\"]
+    "]": ["」", "】", "〕", "］"]
+    "^": {commit: "……"}
+    _: "——"
+    "`": ["｀", "`"]
+    "{": ["『", "〖", "｛"]
+    "|": ["・", "｜", "|", "§", "¦"]
+    "}": ["』", "〗", "｝"]
+    "~": ["〜", "~", "～", "〰"]
+  half_shape:
+    "!": {commit: "！"}
+    "\"": {pair: ["“", "”"]}
+    "#": "#"
+    "$": "$"
+    "'": {pair: ["「", "」"]}
+    "*": "*"
+    ",": ["，", "、", "《》", "【】", "——", "¥", "・", "°", "|"]
+    .: "。"
+    "/": "/"
+    ":": "："
+    ";": {commit: "；"}
+    "<": "<"
+    "=": "="
+    ">": ">"
+    "?": {commit: "？"}
+    "@": "@"
+    "[": "["
+    "\\": "\\"
+    "]": "]"
+    _: _
+    "`": {commit: "`"}
+    "|": "、"
+    "~": "~"
+recognizer:
+  import_preset: default
+  patterns:
+    email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
+    punct: "^/([0-9]0?|[A-Za-z]+)$"
+    uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
+    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
+reverse_lookup:
+  {}
+schema:
+  author:
+    - "double pinyin layout by 鶴"
+    - "Rime schema by 佛振 <chen.sst@gmail.com>"
+  dependencies:
+    - stroke
+  description: |
+    朙月拼音＋小鶴雙拼方案。
+    
+  name: "小鹤双拼"
+  schema_id: double_pinyin_flypy
+  version: 0.18
+speller:
+  algebra:
+    - "erase/^xx$/"
+    - "derive/^([jqxy])u$/$1v/"
+    - "derive/^([aoe])([ioun])$/$1$1$2/"
+    - "abbrev/^([a-z]).+$/$1/"
+    - "abbrev/^([zcs]h).+$/$1/"
+    - "derive/^([zcs])h/$1/"
+    - "derive/^([zcs])([^h])/$1h$2/"
+    - "derive/([ei])n$/$1ng/"
+    - "derive/([ei])ng$/$1n/"
+    - "xform/^([aoe])(ng)?$/$1$1$2/"
+    - "xform/iu$/Q/"
+    - "xform/(.)ei$/$1W/"
+    - "xform/uan$/R/"
+    - "xform/[uv]e$/T/"
+    - "xform/un$/Y/"
+    - "xform/^sh/U/"
+    - "xform/^ch/I/"
+    - "xform/^zh/V/"
+    - "xform/uo$/O/"
+    - "xform/ie$/P/"
+    - "xform/i?ong$/S/"
+    - "xform/ing$|uai$/K/"
+    - "xform/(.)ai$/$1D/"
+    - "xform/(.)en$/$1F/"
+    - "xform/(.)eng$/$1G/"
+    - "xform/[iu]ang$/L/"
+    - "xform/(.)ang$/$1H/"
+    - "xform/ian$/M/"
+    - "xform/(.)an$/$1J/"
+    - "xform/(.)ou$/$1Z/"
+    - "xform/[iu]a$/X/"
+    - "xform/iao$/N/"
+    - "xform/(.)ao$/$1C/"
+    - "xform/ui$/V/"
+    - "xform/in$/B/"
+    - "xlit/QWRTYUIOPSDFGHJKLZXCVBNM/qwrtyuiopsdfghjklzxcvbnm/"
+  alphabet: zyxwvutsrqponmlkjihgfedcba
+  delimiter: " '"
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: ["中", "外"]
+  - name: simplification
+    reset: 1
+    states: ["漢", "汉"]
+  - name: emoji_suggestion
+    reset: 0
+    states: ["😭", "😄"]
+  - name: full_shape
+    states: ["🌓", "🌕"]
+  - name: ascii_punct
+    states: ["🍩", "🍪"]
+translator:
+  contextual_suggestions: true
+  dictionary: luna_pinyin.extended
+  max_homographs: 7
+  max_homophones: 7
+  preedit_format:
+    {}
+  prism: double_pinyin_flypy
