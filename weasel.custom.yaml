@@ -1,92 +1,36 @@
 customization:
   distribution_code_name: Weasel
-  distribution_version: 0.9.29.1
+  distribution_version: 0.14.3
   generator: "Weasel::UIStyleSettings"
-  modified_time: "Wed Feb 12 09:16:25 2014"
-  rime_version: 1.1
-
+  modified_time: "2019-06-22"
+  rime_version: 1.5.3
 patch:
-  # 以下软件默认英文模式
-  app_options/rhino.exe:
-    ascii_mode: true
-  app_options/coreldrw.exe:
-    ascii_mode: true
-  app_options/code.exe:
-    ascii_mode: true
-  app_options/blender.exe:
-    ascii_mode: true
-  app_options/photoshop.exe:
-    ascii_mode: true
-  app_options/illustrator.exe:
-    ascii_mode: true
-  app_options/solidworks.exe:
-    ascii_mode: true
-  app_options/reliccardinal_ws.exe:
-    ascii_mode: true
-  app_optins/powertoys.powerlauncher.exe:
-    ascii_mode: true
-
-  # 以下修改皮肤
-  "style/display_tray_icon": true #是否显示托盘中英图标
-  "style/horizontal": true #横排显示
-  "style/font_face": "Microsoft YaHei" #字体
-  "style/font_point": 13 #字体大小
-  "style/inline_preedit": true # 嵌入式候选窗单行显示
-
-  # "style/layout/border_width": 2
-  # "style/layout/border": 2
-  "style/layout/margin_x": 10 #候选字左右边距
-  "style/layout/margin_y": 10 #候选字上下边距
-  "style/layout/hilite_padding": 7 #候选字背景色色块高度 若想候选字背景色块无边界填充候选框，仅需其高度和候选字上下边距一致即可
-  # "style/layout/hilite_spacing": 3 # 序号和候选字之间的间隔
-  "style/layout/spacing": 10 #编码和候选字上下距离
-  "style/layout/candidate_spacing": 14 # 候选字间隔
-  "style/layout/round_corner": 0 #候选字背景色块圆角幅度
-
-  "style/color_scheme": "Grey"
-
-  preset_color_schemes:
-    "Micosoft":
-        name: "Micosoft"
-        author: "XNOM"
-        back_color: 0xffffff #候选框 背景色
-        border_color: 0xD77800 #候选框 边框颜色
-        text_color: 0x000000 #已选择字 文字颜色
-        hilited_text_color: 0x000000 #已选择字右侧拼音 文字颜色
-        hilited_back_color: 0xffffff #已选择字右侧拼音 背景色
-        hilited_candidate_text_color: 0xffffff #候选字颜色
-        hilited_candidate_back_color: 0xD77800 #候选字背景色
-        candidate_text_color: 0x000000 #未候选字颜色
-
-    "Apathy":
-      name: "Apathy"
-      author: "LIANG Hai"
-      back_color: 0xFFFFFF
-      border_height: 0
-      border_width: 8
-      candidate_format: "%c %@ "
-      comment_text_color: 0x999999
-      corner_radius: 5
-      # font_face: PingFangSC
-      # font_face: "PingFangSC-Regular,HanaMinB"
-      font_point: 16wo mf
-      hilited_candidate_back_color: 0xFFF0E4
-      hilited_candidate_text_color: 0xEE6E00
-      horizontal: true
-      inline_preedit: true
-      # label_font_face: "STHeitiSC-Light"
-      label_font_point: 12
-      text_color: 0x424242
-      
-    "Grey":
-      name: "Grey"
-      author: "riverscn"
-      back_color: 0xF9F9F9 #候选框 背景色
-      border_color: 0x595E69 #候选框 边框颜色
-      text_color: 0x191919 #已选择字 文字颜色
-      hilited_text_color: 0x191919 #已选择字右侧拼音 文字颜色
-      hilited_back_color: 0xF9F9F9 #已选择字右侧拼音 背景色
-      hilited_candidate_text_color: 0x191919 #候选字颜色
-      hilited_candidate_back_color: 0xE0E0E0 #候选字背景色
-      candidate_text_color: 0x191919 #未候选字颜色
-      comment_text_color: 0x888888  #拼音等提示文字颜色
+  "preset_color_schemes/metro": 
+    author: "flypy.com"
+    back_color: 0xffffff
+    border_color: 0xe89f00
+    comment_text_color: 0x666666
+    hilited_back_color: 0xffffff
+    hilited_candidate_back_color: 0xe89f00
+    hilited_candidate_text_color: 0xffffff
+    hilited_comment_text_color: 0x666666
+    hilited_text_color: 0x000000
+    label_color: 0x666666
+    name: "metro"
+    text_color: 0x000000
+  "style/color_scheme": metro
+  "style/display_tray_icon": true
+  "style/font_point": 12
+  "style/horizontal": true
+  "style/inline_preedit": true
+  "style/layout/border_width": 1
+  "style/layout/candidate_spacing": 30
+  "style/layout/hilite_padding": 12
+  "style/layout/hilite_spacing": 2
+  "style/layout/margin_x": 12
+  "style/layout/margin_y": 10
+  "style/layout/min_height": 0
+  "style/layout/min_width": 100
+  "style/layout/round_corner": 0
+  "style/layout/spacing": 10
+  "style/window/@0/move": ""

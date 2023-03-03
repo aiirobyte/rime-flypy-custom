@@ -1,5 +1,17 @@
--- select_character_processor: 以词定字
--- 详见 `lua/select_character.lua`
+function date_translator(input, seg)
+   if (input == "orq") then
+      --- Candidate(type, start, end, text, comment)
+      yield(Candidate("date", seg.start, seg._end, os.date("%Y年%m月%d日"), ""))
+      yield(Candidate("date", seg.start, seg._end, os.date("%Y-%m-%d"), " "))
+   end
+end
 
--- 需要以词定字插件打开第5行注释
--- select_character_processor = require("select_character")
+function time_translator(input, seg)
+   if (input == "ouj") then
+      local cand = Candidate("time", seg.start, seg._end, os.date("%H:%M"), " ")
+      cand.quality = 1
+      yield(cand)
+   end
+end
+
+calculator_translator = require("calculator_translator")
