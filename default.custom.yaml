@@ -12,10 +12,3 @@ patch:
     - {schema: emoji}
   "switcher/hotkeys":
     - "Control+grave"
-  "switcher/save_options":
-    - full_shape
-    - ascii_punct
-    - simplification
-    - zh_hans
-    - emoji_suggestion
-  "menu/page_size": 5   # 每頁候選數
