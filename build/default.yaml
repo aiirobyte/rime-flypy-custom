@@ -2,7 +2,7 @@ __build_info:
   rime_version: 1.7.3
   timestamps:
     default: 1656676381
-    default.custom: 1677763775
+    default.custom: 1677902612
 ascii_composer:
   switch_key:
     Shift_L: commit_code
