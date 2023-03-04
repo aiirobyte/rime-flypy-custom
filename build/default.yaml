@@ -2,16 +2,16 @@ __build_info:
   rime_version: 1.7.3
   timestamps:
     default: 1656676381
-    default.custom: 1677908581
+    default.custom: 1677911884
 ascii_composer:
   good_old_caps_lock: true
   switch_key:
-    Caps_Lock: commit_code
+    Caps_Lock: Escape
     Control_L: noop
     Control_R: noop
     Eisu_toggle: clear
     Shift_L: commit_code
-    Shift_R: commit_code
+    Shift_R: Shift_L
 config_version: 0.36.custom.3391806683
 customization: 3391806683
 key_binder:
@@ -50,7 +50,7 @@ key_binder:
     - {accept: "Control+period", toggle: ascii_punct, when: always}
     - {accept: Caps_Lock, send: Escape, when: composing}
 menu:
-  page_size: 9
+  page_size: 5
 punctuator:
   full_shape:
     " ": {commit: "　"}

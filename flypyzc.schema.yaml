@@ -53,6 +53,24 @@ switches: # 可在状态栏上显示的内容，去掉下面的"#"号可开启
   - options: [ _key_Hide ]
     states: [ ﹀ ]
 
+recognizer:
+  import_preset: default
+  patterns:
+    uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
+    #uppercase: "" #中文状态大写锁定直接上屏
+    udzc: "^[a-z]+'[a-z']*$" #取消首位手动造词
+    # udzc: "^[a-z]*'[a-z']*$"
+    emoji: "~[a-z]*'?$"
+    reverse_lookup: "[a-z]+`+[a-z]*" #“`”符号首位直接上屏
+    # reverse_lookup: "[a-z`]*`+[a-z`]*"
+    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
+
+menu:
+  page_size: 5 #候选项数
+
+style:
+  horizontal: true #竖排为false
+
 engine:
   processors:
     - ascii_composer
@@ -184,7 +202,7 @@ english:
   enable_completion: true
   enable_sentence: false
   initial_quality: -2
-          
+
 key_binder:
   import_preset: default #方案切换相关
   bindings:
@@ -208,20 +226,3 @@ key_binder:
     - {accept: "Control+j", toggle: simplification, when: always} #切换简繁
     - {accept: "Control+period", toggle: ascii_punct, when: always} #切换中英标点
     - {accept: "Control+m", select: .next, when: always} #切换方案
-
-recognizer:
-  import_preset: default
-  patterns:
-    uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
-    #uppercase: "" #中文状态大写锁定直接上屏
-    udzc: "^[a-z]*'[a-z']*$"
-    emoji: "~[a-z]*'?$"
-    reverse_lookup: "[a-z`]*`+[a-z`]*"
-    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
-
-menu:
-  page_size: 5 #候选项数
-  
-style:
-  horizontal: true #竖排为false
-  
