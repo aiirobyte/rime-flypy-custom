@@ -9,6 +9,7 @@ patch:
     good_old_caps_lock: false
     switch_key: {Control_L: noop, Control_R: noop, Eisu_toggle: clear, Shift_L: commit_code, Shift_R: commit_code}
   "key_binder/bindings":
+    - {accept: semicolon, send: 2, when: has_menu} #分号次选
     - {accept: Tab, send: Right, when: composing}
     - {accept: "Shift+Tab", send: Left, when: composing}
     - {accept: minus, send: Page_Down, when: has_menu}
