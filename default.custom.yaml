@@ -5,6 +5,16 @@ customization:
   modified_time: "Thu Mar  2 21:02:26 2023"
   rime_version: 1.7.3
 patch:
+  ascii_composer:
+    good_old_caps_lock: false
+    switch_key: {Control_L: noop, Control_R: noop, Eisu_toggle: clear, Shift_L: commit_code, Shift_R: commit_code}
+  "key_binder/bindings":
+    - {accept: Tab, send: Right, when: composing}
+    - {accept: "Shift+Tab", send: Left, when: composing}
+    - {accept: minus, send: Page_Down, when: has_menu}
+    - {accept: equal, send: Page_Up, when: paging}
+    - {accept: bracketleft, send: Page_Down, when: has_menu}
+    - {accept: bracketright, send: Page_Up, when: paging}
   schema_list:
     - {schema: flypy}
     - {schema: flypyzc}
@@ -12,3 +22,9 @@ patch:
     - {schema: emoji}
   "switcher/hotkeys":
     - "Control+grave"
+  "switcher/save_options":
+    - ascii_mode
+    - full_shape
+    - simplification
+    - emoji_suggestion
+  "menu/page_size": 5   # 每頁候選數
