@@ -9,7 +9,7 @@ schema:
     - 方案设计：何海峰 <flypy@qq.com>
     - 方案修改：Ryan
   description: |
-    小鹤音形挂接码表，可输入英文。
+    小鹤音形挂接码表，可输入英文。Love Fly 方案依赖此项。
   dependencies:
     - flypydz
     - emoji
@@ -166,8 +166,8 @@ reverse_lookup:
   dictionary: flypydz
   tips: 〔反查〕
   comment_format:
-   # - xform/^/〔/
-   # - xform/$/〕/
+  # - xform/^/〔/
+  # - xform/$/〕/
     - xform/ / /
 
 emoji:
