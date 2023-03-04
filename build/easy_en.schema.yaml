@@ -2,7 +2,7 @@ __build_info:
   rime_version: 1.7.3
   timestamps:
     default: 1656676381
-    default.custom: 1677902612
+    default.custom: 1677908581
     easy_en.custom: 1677760303
     easy_en.schema: 1603849424
 engine:
@@ -63,7 +63,7 @@ key_binder:
     - {accept: Caps_Lock, send: Escape, when: composing}
   import_preset: default
 menu:
-  page_size: 5
+  page_size: 9
 punctuator:
   full_shape:
     " ": {commit: "　"}

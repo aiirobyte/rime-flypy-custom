@@ -2,11 +2,11 @@ __build_info:
   rime_version: 1.7.3
   timestamps:
     weasel: 1542025382
-    weasel.custom: 1677757937
+    weasel.custom: 1677909084
 app_options:
-  cmd.exe:
+  code.exe:
     ascii_mode: true
-  conhost.exe:
+  powertoys.exe:
     ascii_mode: true
 config_version: 0.22
 preset_color_schemes:

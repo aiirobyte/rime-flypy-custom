@@ -2,9 +2,14 @@ __build_info:
   rime_version: 1.7.3
   timestamps:
     default: 1656676381
-    default.custom: 1677902612
+    default.custom: 1677908581
 ascii_composer:
+  good_old_caps_lock: true
   switch_key:
+    Caps_Lock: commit_code
+    Control_L: noop
+    Control_R: noop
+    Eisu_toggle: clear
     Shift_L: commit_code
     Shift_R: commit_code
 config_version: 0.36.custom.3391806683
@@ -45,7 +50,7 @@ key_binder:
     - {accept: "Control+period", toggle: ascii_punct, when: always}
     - {accept: Caps_Lock, send: Escape, when: composing}
 menu:
-  page_size: 5
+  page_size: 9
 punctuator:
   full_shape:
     " ": {commit: "　"}
@@ -128,10 +133,9 @@ switcher:
   caption: "切换方案"
   hotkeys:
     - "Control+grave"
-    - "Control+Shift+grave"
-    - F4
   save_options:
-    - ascii_mode
-    - _hide_key_hint
-    - _hide_candidate
-    - _hide_comment
+    - full_shape
+    - ascii_punct
+    - simplification
+    - zh_hans
+    - emoji_suggestion

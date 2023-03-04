@@ -4,7 +4,10 @@ customization:
   generator: "Weasel::UIStyleSettings"
   modified_time: "2019-06-22"
   rime_version: 1.5.3
+
 patch:
+  app_options:
+    "code.exe": { ascii_mode: true }
   "preset_color_schemes/metro": 
     author: "flypy.com"
     back_color: 0xffffff

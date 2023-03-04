@@ -10,7 +10,12 @@ patch:
     - {schema: flypyzc}
     - {schema: easy_en}
     - {schema: emoji}
-  ascii_composer:
-    switch_key:
-      Shift_L: commit_code
-      Shift_R: commit_code
+  "switcher/hotkeys":
+    - "Control+grave"
+  "switcher/save_options":
+    - full_shape
+    - ascii_punct
+    - simplification
+    - zh_hans
+    - emoji_suggestion
+  "menu/page_size": 9   # 每頁候選數
