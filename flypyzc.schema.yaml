@@ -3,7 +3,7 @@
 
 schema:
   schema_id: flypyzc
-  name: Auto Fly
+  name: Flypy Fusion
   version: "1.5"
   author:
     - 方案设计：何海峰 <flypy@qq.com>
@@ -13,7 +13,8 @@ schema:
   dependencies:
     - flypydz
     - emoji
-    - easy_en
+    - melt_eng
+    # - easy_en
 
 switches: # 可在状态栏上显示的内容，去掉下面的"#"号可开启
   - options: [ _keyboard_menu ]
@@ -52,15 +53,22 @@ switches: # 可在状态栏上显示的内容，去掉下面的"#"号可开启
 
 punctuator:
   import_preset: default
-
 key_binder:
   import_preset: default
 
+recognizer:
+  import_preset: default
+  patterns:
+    uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
+    #uppercase: "" #中文状态大写锁定直接上屏
+    udzc: "^[a-z]+'[a-z']*$" #取消首位手动造词
+    # udzc: "^[a-z]*'[a-z']*$"
+    emoji: "~[a-z]*'?$"
+    reverse_lookup: "[a-z]+`+[a-z]*" #“`”符号首位直接上屏
+    # reverse_lookup: "[a-z`]*`+[a-z`]*"
+
 menu:
   page_size: 5 #候选项数
-
-style:
-  horizontal: true #竖排为false
 
 engine: # !
   processors:
@@ -83,12 +91,11 @@ engine: # !
   translators:
     - punct_translator
     - table_translator
-    - table_translator@english # !
+    - table_translator@melt_eng # !
+    # - table_translator@english
     - table_translator@udzc
     - table_translator@emoji
     - table_translator@fixed
-    - lua_translator@date_translator
-    - lua_translator@time_translator
     - table_translator@custom_phraseXT
     - reverse_lookup_translator
     - history_translator@historyF
@@ -97,18 +104,6 @@ engine: # !
     - simplifier
     - simplifier@simplification
     - uniquifier
-
-recognizer:
-  import_preset: default
-  patterns:
-    uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
-    #uppercase: "" #中文状态大写锁定直接上屏
-    udzc: "^[a-z]+'[a-z']*$" #取消首位手动造词
-    # udzc: "^[a-z]*'[a-z']*$"
-    emoji: "~[a-z]*'?$"
-    reverse_lookup: "[a-z]+`+[a-z]*" #“`”符号首位直接上屏
-    # reverse_lookup: "[a-z`]*`+[a-z`]*"
-    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
 
 speller:
   alphabet: '/;zyxwvutsrqponmlkjihgfedcba'
@@ -200,9 +195,18 @@ emoji:
   tips: "〔表情〕"
   tag: emoji
 
-english:
-  dictionary: easy_en
-  spelling_hints: 9
-  enable_completion: true
-  enable_sentence: false
-  initial_quality: -2
+melt_eng:
+  dictionary: melt_eng     # 挂载词库 melt_eng.dict.yaml
+  enable_sentence: false   # 禁止造句
+  enable_completion: true # 禁止补全
+  enable_user_dict: false  # 禁用用户词典
+  initial_quality: -2     # 初始权重
+  comment_format:          # 自定义提示码
+    - xform/.*//           # 清空提示码
+
+# english:
+#   dictionary: easy_en
+#   spelling_hints: 9
+#   enable_completion: true
+#   enable_sentence: false
+#   initial_quality: -2

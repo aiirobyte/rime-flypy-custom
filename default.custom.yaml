@@ -19,13 +19,29 @@ patch:
   schema_list:
     - {schema: flypy}
     - {schema: flypyzc}
-    - {schema: easy_en}
+    - {schema: melt_eng}
     - {schema: emoji}
-  "switcher/hotkeys":
-    - "Control+grave"
-  "switcher/save_options":
-    - ascii_mode
-    - full_shape
-    - simplification
-    - emoji_suggestion
+  switcher:
+    caption: 「方案选单」
+    hotkeys:
+      - F4
+      - Control+grave
+      - Control+Shift+grave
+    save_options:  # 开关记忆，从方案选单（而非快捷键）切换时会记住的选项，需要记忆的开关不能设定 reset
+      - ascii_mode
+      - full_shape
+      - simplification
+      - emoji_suggestion
+    fold_options: true            # 呼出时是否折叠，多方案时建议折叠 true ，一个方案建议展开 false
+    abbreviate_options: true      # 折叠时是否缩写选项
+    option_list_separator: ' | '  # 折叠时的选项分隔符
   "menu/page_size": 5   # 每頁候選數
+  recognizer:
+    patterns:
+      email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"                            # 自带的，email 正则
+      # uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"                           # 自带的，大写字母开头后，可以输入[-_+.'0-9A-Za-z]这些字符
+      url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"  # 自带的，URL 正则
+      # 一些不直接上屏的配置示例：
+      # url_2: "^[A-Za-z]+[.].*"     # 句号不上屏，支持 google.com abc.txt 等网址或文件名，使用句号翻页时需要注释掉
+      # colon: "^[A-Za-z]+:.*"       # 冒号不上屏
+      underscore: "^[A-Za-z]+_.*"  # 下划线不上屏

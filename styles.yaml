@@ -1,0 +1,85 @@
+# Credit: https://github.com/fxliang/weasel_config
+
+patch:
+  __include: my_color_schemes
+  __include: font_face_settings
+  __include: font_size_settings
+  __include: layout_settings
+  __include: ascii_apps
+  style/enable_mouse: true
+  style/display_tray_icon: true
+  style/layout/max_width:  800
+  style/layout/max_height: 600
+
+ascii_apps:
+  app_options:
+    "code.exe": { ascii_mode: true }
+
+my_color_schemes:
+  preset_color_schemes/slumbers:
+    name: "Slumbers"
+    color_format: rgba
+    back_color:                     0xffffffff
+    text_color:                     0x000000ff
+    border_color:                   0x66666600
+    label_color:                    0xa9a9a9ff
+    candidate_text_color:           0x000000ff
+    comment_text_color:             0x666666ff
+    hilited_text_color:             0xffffffff
+    hilited_back_color:             0x444444ff
+    hilited_candidate_back_color:   0x444444ff
+    hilited_candidate_shadow_color: 0x60000030
+    hilited_comment_text_color:     0xeeeeeeff
+    hilited_candidate_text_color:   0xffffffff
+    hilited_label_color:            0xeeeeeeff
+    shadow_color:                   0x66666630
+  preset_color_schemes/lullabies:
+    name: "Lullabies"
+    color_format: rgba
+    back_color:                     0x222222ff
+    text_color:                     0xffffffff
+    border_color:                   0x66666600
+    label_color:                    0xa9a9a9ff
+    candidate_text_color:           0xffffffff
+    comment_text_color:             0x666666ff
+    hilited_text_color:             0xffffffff
+    hilited_back_color:             0xffffff12
+    hilited_candidate_back_color:   0xffffff12
+    hilited_candidate_shadow_color: 0x60000000
+    hilited_comment_text_color:     0xeeeeeeff
+    hilited_candidate_text_color:   0xffffffee 
+    hilited_label_color:            0xeeeeeeff
+    shadow_color:                   0x00000030
+
+font_size_settings:
+  style/font_point:         12
+  style/label_font_point:   10
+  style/comment_font_point: 10
+
+font_face_settings:
+  style/font_face:          "Segoe UI Emoji:20:39, Segoe UI Emoji:1f51f:1f51f, Noto Color Emoji SVG:80, Arial:600:6ff, Segoe UI Emoji:80, LXGW Wenkai"
+  style/label_font_face:    "Segoe UI Emoji:20:39, Segoe UI Emoji:1f51f:1f51f, Noto Color Emoji SVG:80, Arial:600:6ff, Segoe UI Emoji:80, LXGW Wenkai"
+  style/comment_font_face:  "Segoe UI Emoji:20:39, Segoe UI Emoji:1f51f:1f51f, Noto Color Emoji SVG:80, Arial:600:6ff, Segoe UI Emoji:80, LXGW Wenkai"
+
+layout_settings:
+  style/horizontal: true
+  style/inline_preedit: true
+  # color_scheme settings
+  style/color_scheme: slumbers
+  style/color_scheme_dark:  lullabies
+  # style/preedit_type: preview_all
+  # layout settings
+  style/layout/align_type: center # 当前候选字序号和字对齐的方式
+  style/layout/min_height: 0
+  style/layout/border: 0
+  style/layout/spacing: 20
+  style/layout/candidate_spacing: 24
+  style/layout/shadow_radius:   5
+  style/layout/shadow_offset_x: 0
+  style/layout/shadow_offset_y: 0
+  style/layout/hilite_padding:  8 # 当前候选字体的 padding，过大会导致圆角失效
+  style/layout/hilite_spacing: 12 # 当前候选字序号和字中间的距离
+  style/layout/margin_x:  14 # 所有候选到面板边缘的x距离
+  style/layout/margin_y:  14
+  style/layout/round_corner:    12 # 当前候选背景的圆角大小
+  style/layout/corner_radius:   16 # 面板的圆角大小

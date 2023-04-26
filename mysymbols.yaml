@@ -8,6 +8,10 @@ config_version: '1.3'
 patch:
   punctuator/import_preset: mysymbols
   recognizer/patterns/punct: '^\\([0-9]0?|[A-Za-z]+)$'
+  "engine/translators/+":
+    - lua_translator@time_translator
+    - lua_translator@date_translator
+    - lua_translator@week_translator
 
 punctuator:
   full_shape:

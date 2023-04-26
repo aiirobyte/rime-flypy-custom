@@ -1,2 +1,7 @@
 patch:
   __include: mysymbols:/patch
+  # "engine/translators/+":
+  #   - lua_translator@time_translator
+  #   - lua_translator@date_translator
+  #   - lua_translator@week_translator
+  # 不能在这里导入，会出错，直接加人到 mysymbols 中了

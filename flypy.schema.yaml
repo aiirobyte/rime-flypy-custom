@@ -3,7 +3,7 @@
 
 schema:
   schema_id: flypy
-  name: Love Fly
+  name: Flypy
   version: "10.7.2"
   author:
     - 方案设计：何海峰 <flypy@qq.com>
@@ -13,7 +13,6 @@ schema:
   dependencies:
     - flypydz
     - emoji
-
 
 switches: # 可在状态栏上显示的内容，去掉下面的"#"号可开启
   - options: [ _keyboard_menu ]
@@ -52,15 +51,21 @@ switches: # 可在状态栏上显示的内容，去掉下面的"#"号可开启
 
 punctuator:
   import_preset: default
-
 key_binder:
   import_preset: default #方案切换相关
 
+recognizer:
+  import_preset: default
+  patterns:
+    uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
+    #uppercase: "" #中文状态大写锁定直接上屏
+    udzc: "^[a-z]*'[a-z']*$"
+    #emoji: "~[a-z]*'?$"
+    reverse_lookup: "[a-z]+`+[a-z]*" #“`”符号首位直接上屏
+    punct: ""
+
 menu:
   page_size: 5 #候选项数
-  
-style:
-  horizontal: true #竖排为false
 
 engine: # !
   processors:
@@ -87,8 +92,6 @@ engine: # !
     - table_translator@udzc
     - table_translator@emoji
     - table_translator@fixed
-    - lua_translator@date_translator
-    - lua_translator@time_translator
     - table_translator@custom_phraseXT
     - reverse_lookup_translator
     - history_translator@historyF
@@ -97,17 +100,6 @@ engine: # !
     - simplifier
     - simplifier@simplification
     - uniquifier
-
-recognizer:
-  import_preset: default
-  patterns:
-    uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
-    #uppercase: "" #中文状态大写锁定直接上屏
-    udzc: "^[a-z]*'[a-z']*$"
-    #emoji: "~[a-z]*'?$"
-    reverse_lookup: "[a-z]+`+[a-z]*" #“`”符号首位直接上屏
-    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
-    punct: ""
 
 speller:
   alphabet: '/;zyxwvutsrqponmlkjihgfedcba'
