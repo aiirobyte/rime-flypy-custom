@@ -62,19 +62,7 @@ menu:
 style:
   horizontal: true #竖排为false
 
-recognizer:
-  import_preset: default
-  patterns:
-    uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
-    #uppercase: "" #中文状态大写锁定直接上屏
-    udzc: "^[a-z]+'[a-z']*$" #取消首位手动造词
-    # udzc: "^[a-z]*'[a-z']*$"
-    emoji: "~[a-z]*'?$"
-    reverse_lookup: "[a-z]+`+[a-z]*" #“`”符号首位直接上屏
-    # reverse_lookup: "[a-z`]*`+[a-z`]*"
-    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
-
-engine:
+engine: # !
   processors:
     - ascii_composer
     - recognizer
@@ -95,12 +83,12 @@ engine:
   translators:
     - punct_translator
     - table_translator
-    - lua_translator@date_translator
-    - lua_translator@time_translator
+    - table_translator@english # !
     - table_translator@udzc
     - table_translator@emoji
     - table_translator@fixed
-    - table_translator@english
+    - lua_translator@date_translator
+    - lua_translator@time_translator
     - table_translator@custom_phraseXT
     - reverse_lookup_translator
     - history_translator@historyF
@@ -109,6 +97,18 @@ engine:
     - simplifier
     - simplifier@simplification
     - uniquifier
+
+recognizer:
+  import_preset: default
+  patterns:
+    uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
+    #uppercase: "" #中文状态大写锁定直接上屏
+    udzc: "^[a-z]+'[a-z']*$" #取消首位手动造词
+    # udzc: "^[a-z]*'[a-z']*$"
+    emoji: "~[a-z]*'?$"
+    reverse_lookup: "[a-z]+`+[a-z]*" #“`”符号首位直接上屏
+    # reverse_lookup: "[a-z`]*`+[a-z`]*"
+    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
 
 speller:
   alphabet: '/;zyxwvutsrqponmlkjihgfedcba'
@@ -119,7 +119,7 @@ speller:
   auto_select: true   #自动上屏
   auto_select_pattern: ^;.$|^\w{4}$ #自动上屏规则
   #auto_select_unique_candidate: true
-  #auto_clear: auto #manual|auto|max_length 空码按下一键确认清屏|空码自动清|达到最长码时后码顶上清屏
+  #auto_clear: max_length #manual|auto|max_length 空码按下一键确认清屏|空码自动清|达到最长码时后码顶上清屏
   algebra:
     - derive/^z([a-z]{2,})$/v$1/ # z => zh
     - derive/^v([a-z]{2,})$/z$1/ # zh => z
@@ -136,7 +136,7 @@ translator:
   dictionary: flypyzc.extended
   enable_charset_filter: false
   enable_sentence: false
-  enable_encoder: false  
+  enable_encoder: false
   enable_completion: false  # 编码提示开关
   encode_commit_history: false
   enable_user_dict: false

@@ -14,8 +14,6 @@ schema:
     - flypydz
     - emoji
 
-punctuator:
-  import_preset: default
 
 switches: # 可在状态栏上显示的内容，去掉下面的"#"号可开启
   - options: [ _keyboard_menu ]
@@ -51,8 +49,20 @@ switches: # 可在状态栏上显示的内容，去掉下面的"#"号可开启
     states: [ "　　　　　　　", "　　　　　　　"]
   - options: [ _key_Hide ]
     states: [ ﹀ ]
-    
-engine:
+
+punctuator:
+  import_preset: default
+
+key_binder:
+  import_preset: default #方案切换相关
+
+menu:
+  page_size: 5 #候选项数
+  
+style:
+  horizontal: true #竖排为false
+
+engine: # !
   processors:
     - ascii_composer
     - recognizer
@@ -73,10 +83,10 @@ engine:
   translators:
     - punct_translator
     - table_translator
-    - table_translator@fixed
-    - table_translator@zdzc
+    - table_translator@zdzc # !
     - table_translator@udzc
     - table_translator@emoji
+    - table_translator@fixed
     - lua_translator@date_translator
     - lua_translator@time_translator
     - table_translator@custom_phraseXT
@@ -88,6 +98,17 @@ engine:
     - simplifier@simplification
     - uniquifier
 
+recognizer:
+  import_preset: default
+  patterns:
+    uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
+    #uppercase: "" #中文状态大写锁定直接上屏
+    udzc: "^[a-z]*'[a-z']*$"
+    #emoji: "~[a-z]*'?$"
+    reverse_lookup: "[a-z]+`+[a-z]*" #“`”符号首位直接上屏
+    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
+    punct: ""
+
 speller:
   alphabet: '/;zyxwvutsrqponmlkjihgfedcba'
   initials: 'abcdefghijklmnopqrstuvwxyz;'
@@ -96,7 +117,19 @@ speller:
   max_code_length: 4 #全码码长，过则顶字上屏
   auto_select: true   #自动上屏
   auto_select_pattern: ^;.$|^\w{4}$ #自动上屏规则
-  #auto_clear: max_length #manual|auto|max_length 空码按下一键确认清屏|空码自动清|达到最长码时后码顶上清屏
+  #auto_select_unique_candidate: true
+  #auto_clear: auto #manual|auto|max_length 空码按下一键确认清屏|空码自动清|达到最长码时后码顶上清屏
+  algebra:
+    - derive/^z([a-z]{2,})$/v$1/ # z => zh
+    - derive/^v([a-z]{2,})$/z$1/ # zh => z
+    - derive/^c([a-z]{2,})$/i$1/ # c => ch
+    - derive/^i([a-z]{2,})$/c$1/ # ch => c
+    - derive/^s([a-z]{2,})$/u$1/ # s => sh
+    - derive/^u([a-z]{2,})$/s$1/ # sh => s
+    - derive/^([a-z])f([a-z]+)$/$1g$2/ # en => eng
+    - derive/^([a-z])g([a-z]+)$/$1f$2/ # eng => en
+    - derive/^([a-z])b([a-z]+)$/$1k$2/ # in => ing
+    - derive/^([a-z])k([a-z]+)$/$1b$2/ # ing => in
 
 translator:
   dictionary: flypy
@@ -150,7 +183,7 @@ simplification:
   opencc_config: s2tw.json
   option_name: simplification
   tips: all  #简繁对照，all字詞  char字
-  
+
 custom_phraseXT:
   dictionary: ""
   user_dict: flypy_sys
@@ -173,46 +206,3 @@ emoji:
   prefix: "~"
   tips: "〔表情〕"
   tag: emoji
-
-key_binder:
-  import_preset: default #方案切换相关
-  bindings:
-    - {accept: bracketleft, send: Page_Up, when: paging} # [上翻页
-    - {accept: bracketright, send: Page_Down, when: has_menu} # ]下翻页
-    - {accept: semicolon, send: 2, when: has_menu} #分号次选
-    #- {accept: Release+semicolon, send: semicolon, when: has_menu} #如要使用分号引导符号功能，并双击上屏分号，需注销此行
-    #- {accept: period, send: 2, when: has_menu} #句号次选，已用下面内容替代
-    - {accept: comma, send: comma, when: paging} #注销逗号翻页
-    - {accept: period, send: period, when: has_menu} #注销句号翻页
-    - {accept: dollar, send: 2, when: composing}
-    - {accept: Release+dollar, send: period, when: composing}
-    #- {accept: Release+period, send: period, when: composing}
-    #- {accept: comma, send: 2, when: has_menu} #逗号次选
-    - {accept: bar, send: 2, when: composing}
-    - {accept: Release+bar, send: comma, when: composing}
-    #- {accept: Release+comma, send: comma, when: composing}
-    - {accept: "Tab", send: Escape, when: composing}
-    - {accept: "Caps_Lock", send: Escape, when: composing} 
-    - {accept: "Shift_R", send: Escape, when: composing}
-    - {accept: "Shift+space", toggle: full_shape, when: always} #切换全半角
-    - {accept: "Control+j", toggle: simplification, when: always} #切换简繁
-    - {accept: "Control+period", toggle: ascii_punct, when: always} #切换中英标点
-    - {accept: "Control+m", select: .next, when: always} #切换方案
-
-recognizer:
-  import_preset: default
-  patterns:
-    #uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
-    uppercase: "" #中文状态大写锁定直接上屏
-    udzc: "^[a-z]*'[a-z']*$"
-    emoji: "~[a-z]*'?$"
-    reverse_lookup: "[a-z`]*`+[a-z`]*"
-    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
-    punct: ""
-
-menu:
-  page_size: 5 #候选项数
-  
-style:
-  horizontal: true #竖排为false
-  
