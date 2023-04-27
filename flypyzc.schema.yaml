@@ -1,6 +1,13 @@
 # Flypyzc schema settings
 # encoding: utf-8
 
+# Credits:
+# - https://flypy.com
+# - https://github.com/ryan00zou/rime-xhup
+# - https://github.com/iDvel/rime-ice
+
+config_version: '2023-04-27'
+
 schema:
   schema_id: flypyzc
   name: Flypy Fusion
@@ -9,47 +16,27 @@ schema:
     - 方案设计：何海峰 <flypy@qq.com>
     - 方案修改：Ryan
   description: |
-    小鹤音形挂接码表，可输入英文。Love Fly 方案依赖此项。
+    小鹤音形挂接码表，可输入英文。
   dependencies:
-    - flypydz
-    - emoji
+    # - flypydz
     - melt_eng
-    # - easy_en
 
 switches: # 可在状态栏上显示的内容，去掉下面的"#"号可开启
-  - options: [ _keyboard_menu ]
-    states: [ "　☰" ]
   - name: ascii_mode
-    states: [ CN, EN ]
+    states: [ 中, 英 ]
     reset: 0
+  - name: ascii_punct # 中英标点
+    states: [ ¥, $ ]
+    reset: 0
+  - name: traditionalization
+    states: [ 简, 繁 ]
+    reset: 0
+  - name: emoji
+    states: [ 💀, 😄 ]
+    reset: 1
   - name: full_shape
-    #states: [ ◖, ● ]
+    states: [ 半, 全 ]
     reset: 0
-  - name: _hide_key_hint
-    #states: [ ≑, ≟ ]
-    reset: 0
-  - options: [ _keyboard_emoji, _keyboard_emoji ]
-    states: [ "🎏", "😂"]
-  - options: [ _keyboard_number ]
-    #states: [ 123 ]
-    ascii_mode: 0
-  - options: [_key_IXH]
-    #states: [㊫]
-  - options: [ _key_VOICE_ASSIST ]
-    #states: [ "🎤" ]
-  - name: simplification
-    #states: [ 简, 繁 ]
-    reset: 0
-  - name: _hide_candidate
-    #states: [ ☐, ☒ ]
-    reset: 0
-  - name: ascii_punct
-    #states: [ "，。", " ,　. " ]
-    reset: 0
-  - options: [ _keyboard_default, _keyboard_defaultVJ]
-    states: [ "　　　　　　　", "　　　　　　　"]
-  - options: [ _key_Hide ]
-    states: [ ﹀ ]
 
 punctuator:
   import_preset: default
@@ -60,17 +47,13 @@ recognizer:
   import_preset: default
   patterns:
     uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
-    #uppercase: "" #中文状态大写锁定直接上屏
     udzc: "^[a-z]+'[a-z']*$" #取消首位手动造词
     # udzc: "^[a-z]*'[a-z']*$"
-    emoji: "~[a-z]*'?$"
     reverse_lookup: "[a-z]+`+[a-z]*" #“`”符号首位直接上屏
     # reverse_lookup: "[a-z`]*`+[a-z`]*"
+    punct: "^V([0-9]|10|[A-Za-z]+)$"  # 响应 symbols_caps_v.yaml 的 symbols
 
-menu:
-  page_size: 5 #候选项数
-
-engine: # !
+engine:
   processors:
     - ascii_composer
     - recognizer
@@ -84,17 +67,14 @@ engine: # !
     - ascii_segmentor
     - matcher
     - affix_segmentor@udzc
-    - affix_segmentor@emoji
     - abc_segmentor
     - punct_segmentor
     - fallback_segmentor  
   translators:
     - punct_translator
     - table_translator
-    - table_translator@melt_eng # !
-    # - table_translator@english
+    - table_translator@melt_eng
     - table_translator@udzc
-    - table_translator@emoji
     - table_translator@fixed
     - table_translator@custom_phraseXT
     - reverse_lookup_translator
@@ -102,12 +82,14 @@ engine: # !
     - history_translator@historyI
   filters:
     - simplifier
-    - simplifier@simplification
+    - simplifier@emoji
+    - simplifier@traditionalize
     - uniquifier
 
 speller:
-  alphabet: '/;zyxwvutsrqponmlkjihgfedcba'
-  initials: 'abcdefghijklmnopqrstuvwxyz;'
+  # 如果不想让什么标点直接上屏，可以加在 alphabet，或者编辑标点符号为两个及以上的映射
+  alphabet: ';zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA' # ";" 符号作为 flypy_sys.txt 字典 key 的一部分
+  # initials: 'abcdefghijklmnopqrstuvwxyz;' # 能够进行拼写的第一个字符
   finals: '/'
   delimiter: " '"
   max_code_length: 4 #全码码长，过则顶字上屏
@@ -166,10 +148,10 @@ historyI:
   size: 1 #重复前几次上屏
   initial_quality: 0 #次选
 
-simplification:
-  opencc_config: s2tw.json
-  option_name: simplification
-  tips: all  #简繁对照，all字詞  char字
+traditionalize:
+  option_name: traditionalization
+  opencc_config: s2t.json             # s2t.json | s2hk.json | s2tw.json | s2twp.json
+  tips: all                          # 转换提示: all 都显示 | char 仅单字显示 | none 不显示。
 
 custom_phraseXT:
   dictionary: ""
@@ -188,12 +170,8 @@ reverse_lookup:
     - xform/ / /
 
 emoji:
-  dictionary: emoji
-  enable_completion: false
-  enable_user_dict: false
-  prefix: "~"
-  tips: "〔表情〕"
-  tag: emoji
+  opencc_config: emoji.json
+  option_name: emoji
 
 melt_eng:
   dictionary: melt_eng     # 挂载词库 melt_eng.dict.yaml
@@ -204,10 +182,3 @@ melt_eng:
   initial_quality: -2      # 初始权重
   comment_format:          # 自定义提示码
     - xform/.*//           # 清空提示码
-
-# english:
-#   dictionary: easy_en
-#   spelling_hints: 9
-#   enable_completion: true
-#   enable_sentence: false
-#   initial_quality: -2

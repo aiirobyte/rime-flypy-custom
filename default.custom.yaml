@@ -10,8 +10,8 @@ patch:
     switch_key: {Control_L: noop, Control_R: noop, Eisu_toggle: clear, Shift_L: commit_code, Shift_R: commit_code}
   "key_binder/bindings":
     - {accept: semicolon, send: 2, when: has_menu} #分号次选
-    - {accept: Tab, send: Right, when: composing}
-    - {accept: "Shift+Tab", send: Left, when: composing}
+    - {accept: Tab, send: Down, when: has_menu}
+    - {accept: "Shift+Tab", send: Up, when: composing}
     - {accept: minus, send: Page_Down, when: has_menu}
     - {accept: equal, send: Page_Up, when: paging}
     - {accept: bracketleft, send: Page_Down, when: has_menu}
@@ -20,18 +20,17 @@ patch:
     - {schema: flypy}
     - {schema: flypyzc}
     - {schema: melt_eng}
-    - {schema: emoji}
   switcher:
     caption: 「方案选单」
     hotkeys:
       - F4
       - Control+grave
-      - Control+Shift+grave
     save_options:  # 开关记忆，从方案选单（而非快捷键）切换时会记住的选项，需要记忆的开关不能设定 reset
       - ascii_mode
+      - ascii_punct
+      - traditionalization
       - full_shape
-      - simplification
-      - emoji_suggestion
+      - emoji
     fold_options: true            # 呼出时是否折叠，多方案时建议折叠 true ，一个方案建议展开 false
     abbreviate_options: true      # 折叠时是否缩写选项
     option_list_separator: ' | '  # 折叠时的选项分隔符
