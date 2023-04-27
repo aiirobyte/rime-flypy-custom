@@ -5,6 +5,7 @@
 # - https://flypy.com
 # - https://github.com/ryan00zou/rime-xhup
 # - https://github.com/iDvel/rime-ice
+# - https://github.com/functoreality/rime-flypy-zrmfast
 
 config_version: '2023-04-27'
 
@@ -52,6 +53,7 @@ recognizer:
     reverse_lookup: "[a-z]+`+[a-z]*" #“`”符号首位直接上屏
     # reverse_lookup: "[a-z`]*`+[a-z`]*"
     punct: "^V([0-9]|10|[A-Za-z]+)$"  # 响应 symbols_caps_v.yaml 的 symbols
+    melt_eng: "^iw[a-z]*" # 响应单词输入
 
 engine:
   processors:
@@ -67,14 +69,15 @@ engine:
     - ascii_segmentor
     - matcher
     - affix_segmentor@udzc
+    - affix_segmentor@melt_eng
     - abc_segmentor
     - punct_segmentor
     - fallback_segmentor  
   translators:
     - punct_translator
     - table_translator
-    - table_translator@melt_eng
     - table_translator@udzc
+    - table_translator@melt_eng
     - table_translator@fixed
     - table_translator@custom_phraseXT
     - reverse_lookup_translator
@@ -174,11 +177,14 @@ emoji:
   option_name: emoji
 
 melt_eng:
+  tag: melt_eng
+  tips: "〔英文单词〕"
   dictionary: melt_eng     # 挂载词库 melt_eng.dict.yaml
-  spelling_hints: 9
   enable_sentence: false   # 禁止造句
   enable_completion: true  # 禁止补全
   enable_user_dict: false  # 禁用用户词典
+  prefix: "iw"
+  spelling_hints: 9
   initial_quality: -2      # 初始权重
   comment_format:          # 自定义提示码
-    - xform/.*//           # 清空提示码
+    - xform/^.+//          # 清空提示码
