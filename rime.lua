@@ -19,5 +19,3 @@ function week_translator(input, seg)
                         ""))
     end
 end
-
-calculator_translator = require("calculator_translator")
