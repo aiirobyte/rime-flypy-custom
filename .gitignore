@@ -1,5 +1,3 @@
-melt_eng.userdb
-flypyzc.userdb
-luna_pinyin.userdb
+*.userdb/
 build/
 user.yaml
