@@ -1,12 +1,6 @@
 # Flypyzc schema settings
 # encoding: utf-8
 
-# Credits:
-# - https://flypy.com
-# - https://github.com/ryan00zou/rime-xhup
-# - https://github.com/iDvel/rime-ice
-# - https://github.com/functoreality/rime-flypy-zrmfast
-
 config_version: '2023-04-27'
 
 schema:
@@ -47,13 +41,13 @@ key_binder:
 recognizer:
   import_preset: default
   patterns:
-    uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
+    uppercase: "[A-Z][-_+.'A-Z0-9a-z]*$(?![0-9])" # 大写字母后可输入其他字符，最后一位不能为数字，方便上屏
     udzc: "^[a-z]+'[a-z']*$" #取消首位手动造词
     # udzc: "^[a-z]*'[a-z']*$"
     reverse_lookup: "[a-z]+`+[a-z]*" #“`”符号首位直接上屏
     # reverse_lookup: "[a-z`]*`+[a-z`]*"
     punct: "^V([0-9]|10|[A-Za-z]+)$"  # 响应 symbols_caps_v.yaml 的 symbols
-    melt_eng: "^iw[a-z]*" # 响应单词输入
+    melt_eng: "^iw[A-Za-z]*" # 响应单词输入
 
 engine:
   processors:
