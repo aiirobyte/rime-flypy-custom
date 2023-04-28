@@ -1,4 +1,10 @@
-# Credit: https://github.com/fxliang/weasel_config
+# Rime style settings
+# encoding: utf-8
+#
+# config base from https://github.com/fxliang/weasel_config
+# modified config for https://github.com/fxliang/weasel
+
+config_version: '2023-04-28'
 
 patch:
   __include: my_color_schemes
@@ -6,6 +12,7 @@ patch:
   __include: font_size_settings
   __include: layout_settings
   __include: ascii_apps
+  style/color_scheme: slumbers
   style/enable_mouse: true
   style/display_tray_icon: true
   style/layout/max_width:  800
@@ -47,7 +54,7 @@ my_color_schemes:
     hilited_candidate_back_color:   0xffffff16
     hilited_candidate_shadow_color: 0x60000030
     hilited_comment_text_color:     0xeeeeeeff
-    hilited_candidate_text_color:   0xffffffee 
+    hilited_candidate_text_color:   0xffffffee
     hilited_label_color:            0xeeeeeeff
     shadow_color:                   0x00000030
 

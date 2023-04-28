@@ -1,12 +1,4 @@
-customization:
-  distribution_code_name: Weasel
-  distribution_version: 0.14.3
-  generator: "Weasel::UIStyleSettings"
-  modified_time: "2019-06-22"
-  rime_version: 1.5.3
-
-# modified config for https://github.com/fxliang/weasel
+config_version: '2023-04-28'
 
 patch:
   __include: styles:/patch
-  "style/color_scheme": slumbers

@@ -1,9 +1,5 @@
-customization:
-  distribution_code_name: Weasel
-  distribution_version: 0.14.3
-  generator: "Rime::SwitcherSettings"
-  modified_time: "Thu Mar  2 21:02:26 2023"
-  rime_version: 1.7.3
+config_version: '2023-04-28'
+
 patch:
   ascii_composer:
     good_old_caps_lock: false
@@ -17,7 +13,6 @@ patch:
     - {accept: bracketleft, send: Page_Down, when: has_menu}
     - {accept: bracketright, send: Page_Up, when: paging}
   schema_list:
-    - {schema: flypy}
     - {schema: flypyzc}
     - {schema: melt_eng}
   switcher:

@@ -1,4 +1,5 @@
 *.userdb/
 build/
 plum/
+installation.yaml
 user.yaml
