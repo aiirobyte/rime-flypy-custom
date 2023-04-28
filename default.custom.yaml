@@ -1,20 +1,13 @@
 config_version: '2023-04-28'
 
 patch:
-  ascii_composer:
-    good_old_caps_lock: false
-    switch_key: {Control_L: noop, Control_R: noop, Eisu_toggle: clear, Shift_L: commit_code, Shift_R: commit_code}
-  "key_binder/bindings":
-    - {accept: semicolon, send: 2, when: has_menu} #分号次选
-    - {accept: Tab, send: Down, when: has_menu}
-    - {accept: "Shift+Tab", send: Up, when: composing}
-    - {accept: minus, send: Page_Down, when: has_menu}
-    - {accept: equal, send: Page_Up, when: paging}
-    - {accept: bracketleft, send: Page_Down, when: has_menu}
-    - {accept: bracketright, send: Page_Up, when: paging}
   schema_list:
-    - {schema: flypyzc}
-    - {schema: melt_eng}
+    - schema: flypyzc
+    - schema: melt_eng
+
+  menu:
+    page_size: 5   # 每頁候選數
+
   switcher:
     caption: 「方案选单」
     hotkeys:
@@ -29,13 +22,32 @@ patch:
     fold_options: true            # 呼出时是否折叠，多方案时建议折叠 true ，一个方案建议展开 false
     abbreviate_options: true      # 折叠时是否缩写选项
     option_list_separator: ' | '  # 折叠时的选项分隔符
-  "menu/page_size": 5   # 每頁候選數
+
+  ascii_composer:
+    good_old_caps_lock: false
+    switch_key:
+      Control_L: noop
+      Control_R: noop
+      Eisu_toggle: clear
+      Shift_L: commit_code
+      Shift_R: commit_code
+
+  key_binder:
+    bindings:
+      - {accept: semicolon, send: 2, when: has_menu} #分号次选
+      - {accept: Tab, send: Down, when: has_menu}
+      - {accept: "Shift+Tab", send: Up, when: composing}
+      - {accept: minus, send: Page_Down, when: has_menu}
+      - {accept: equal, send: Page_Up, when: paging}
+      - {accept: bracketleft, send: Page_Down, when: has_menu}
+      - {accept: bracketright, send: Page_Up, when: paging}
+
   recognizer:
     patterns:
       email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"                            # 自带的，email 正则
       # uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"                           # 自带的，大写字母开头后，可以输入[-_+.'0-9A-Za-z]这些字符
       url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"  # 自带的，URL 正则
       # 一些不直接上屏的配置示例：
-      # url_2: "^[A-Za-z]+[.].*"     # 句号不上屏，支持 google.com abc.txt 等网址或文件名，使用句号翻页时需要注释掉
-      # colon: "^[A-Za-z]+:.*"       # 冒号不上屏
+      short_url: "^[A-Za-z]{5,}[.].*"     # 句号不上屏，支持 abc.txt 等网址或文件名，防止影响音形输入，这里设置为 5 个字母及以上
+      colon: "^[A-Za-z]{5,}:.*"       # 冒号不上屏
       underscore: "^[A-Za-z]+_.*"  # 下划线不上屏
