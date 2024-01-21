@@ -41,7 +41,7 @@ key_binder:
 recognizer:
   import_preset: default
   patterns:
-    uppercase: "[A-Z][-_+.'A-Z0-9a-z]*$(?![0-9])" # 大写字母后可输入其他字符，最后一位不能为数字，方便上屏
+    uppercase: "[A-Z][-_+.'A-Z0-9a-z]*(?<![0-9])$" # 大写字母后可输入其他字符，最后一位不能为数字，方便上屏
     udzc: "^[a-z]+'[a-z']*$" #取消首位手动造词
     # udzc: "^[a-z]*'[a-z']*$"
     reverse_lookup: "[a-z]+`+[a-z]*" #“`”符号首位直接上屏
