@@ -40,6 +40,8 @@ recognizer:
     reverse_lookup: "[a-z`]*`+[a-z`]*"
     punct: "^(V|S)([0-9]|10|[A-Za-z]+)$"  # 响应 symbols_caps_v.yaml 的 symbols
     number: "^R[0-9]+[.]?[0-9]*"      # 响应 number_translator
+    colon: "^[A-Za-z]{5,}:.*"       # 冒号不上屏
+    short_url: "^[A-Za-z]{5,}[.].*"     # 句号不上屏，支持 abc.txt 等网址或文件名，避免影响音形输入上屏，这里只设置为 5 个字母及以上
 
 engine:
   processors:
@@ -76,6 +78,7 @@ engine:
     - lua_filter@v_filter
     - lua_filter@autocap_filter
     - lua_filter@reduce_english_filter
+    - lua_filter@custom_filter
     - uniquifier
 
 speller:
@@ -145,6 +148,10 @@ reduce_english_filter:
   tad, tail, taj, tar, tax, tec, ted, tel, ter, tex, tic, tied, tier, ties, tim, tin, tit, tour, tout, tum,
   wag, wand, womens, wap, wax, weir, won,
   yan, yen]
+
+# Lua 配置：自定义特定编码/编码正则匹配去除候选，实现不自动上屏
+custom_filter:
+  words: [http]
 
 auto_creation:
   __include: /translator

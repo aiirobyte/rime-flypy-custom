@@ -48,7 +48,5 @@ patch:
     patterns:
       email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"                            # 自带的，email 正则
       url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"  # 自带的，URL 正则
-      short_url: "^[A-Za-z]{5,}[.].*"     # 句号不上屏，支持 abc.txt 等网址或文件名，避免影响音形输入上屏，这里只设置为 5 个字母及以上
-      colon: "^[A-Za-z]{5,}:.*"       # 冒号不上屏
       underscore: "^[A-Za-z]+_.*"  # 下划线不上屏
       uppercase: "[A-Z][-_+.'A-Z0-9a-z]*(?<![0-9])$" # 大写字母后可输入其他字符，无符号时无法输入数字，方便上屏英文单词

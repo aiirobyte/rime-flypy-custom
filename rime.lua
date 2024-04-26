@@ -34,6 +34,8 @@ autocap_filter = require("autocap_filter")
 -- 降低部分英语单词在候选项的位置，可在方案中配置要降低的单词
 reduce_english_filter = require("reduce_english_filter")
 
+-- 取消特定输入码的候选项
+custom_filter = require("custom_filter")
 
 
 
