@@ -1,0 +1,2 @@
+patch:
+  __include: symbols:/patch #将 symbols.yaml 中配置覆盖到方案配置中

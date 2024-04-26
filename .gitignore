@@ -1,0 +1,6 @@
+build/
+cn_dicts/
+en_dicts/
+*.userdb/
+sync/
+installation.yaml

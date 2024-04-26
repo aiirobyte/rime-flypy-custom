@@ -1,0 +1,228 @@
+# Flypy schema settings
+# encoding: utf-8
+
+config_version: '2023-04-27'
+
+schema:
+  schema_id: flypy
+  name: 小鹤音形
+  version: "1.5"
+  author:
+    - 方案设计：何海峰 <flypy@qq.com>
+    - 方案修改：Ryan
+  description: |
+    小鹤音形挂接码表。
+  dependencies:
+    - melt_eng
+    - rev_flypy
+
+switches: # 可在状态栏上显示的内容，去掉下面的"#"号可开启
+  - name: ascii_mode
+    states: [ 中, 英 ]
+    reset: 0
+  - name: ascii_punct # 中英标点
+    states: [ ¥, $ ]
+    reset: 0
+  - name: traditionalization
+    states: [ 简, 繁 ]
+    reset: 0
+  - name: full_shape
+    states: [ 半, 全 ]
+    reset: 0
+
+punctuator:
+  import_preset: default
+key_binder:
+  import_preset: default
+recognizer:
+  import_preset: default
+  patterns:
+    reverse_lookup: "[a-z`]*`+[a-z`]*"
+    punct: "^(V|S)([0-9]|10|[A-Za-z]+)$"  # 响应 symbols_caps_v.yaml 的 symbols
+    number: "^R[0-9]+[.]?[0-9]*"      # 响应 number_translator
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    # - affix_segmentor@custom_creation
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    # - script_translator
+    # - table_translator@custom_creation
+    - table_translator@auto_creation
+    - table_translator@melt_eng
+    - table_translator@custom_phraseVD
+    - table_translator@custom_phraseXT
+    - table_translator@custom_phraseYH
+    - table_translator@custom_phraseQMZ
+    - reverse_lookup_translator
+    - history_translator@history
+  filters:
+    - lua_filter@corrector
+    - simplifier@traditionalize
+    - lua_filter@v_filter
+    - lua_filter@autocap_filter
+    - lua_filter@reduce_english_filter
+    - uniquifier
+
+speller:
+  # 如果不想让什么标点直接上屏，可以加在 alphabet，或者编辑标点符号为两个及以上的映射
+  alphabet: ';zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA' # ";" 符号作为 flypy_sys.txt 字典 key 的一部分
+  # initials: 'abcdefghijklmnopqrstuvwxyz;' # 能够进行拼写的第一个字符
+  finals: '/'
+  delimiter: " '"
+  max_code_length: 4 #全码码长，过则顶字上屏
+  auto_select: true   #自动上屏
+  auto_select_pattern: ^;.$|^[a-z]{4}$ #自动上屏规则
+  auto_select_unique_candidate: true
+  #auto_clear: max_length #manual|auto|max_length 空码按下一键确认清屏|空码自动清|达到最长码时后码顶上清屏
+  algebra: # 模糊音，可注释掉不需要的
+    - derive/^z([a-z]{2,})$/v$1/ # z => zh, only fuzzy more than 1
+    - derive/^v([a-z]{2,})$/z$1/ # zh => z
+    - derive/^c([a-z]{2,})$/i$1/ # c => ch
+    - derive/^i([a-z]{2,})$/c$1/ # ch => c
+    - derive/^s([a-z]{2,})$/u$1/ # s => sh
+    - derive/^u([a-z]{2,})$/s$1/ # sh => s
+    - derive/^([a-z])f([a-z]+)$/$1g$2/ # en => eng, only fuzzy second
+    - derive/^([a-z])g([a-z]+)$/$1f$2/ # eng => en
+    - derive/^([a-z])b([a-z]+)$/$1k$2/ # in => ing
+    - derive/^([a-z])k([a-z]+)$/$1b$2/ # ing => in
+
+translator:
+  dictionary: flypy.extended
+  enable_charset_filter: false
+  enable_sentence: false
+  enable_encoder: false
+  enable_completion: false  # 编码提示开关
+  encode_commit_history: false
+  enable_user_dict: false
+  initial_quality: 1.2
+  disable_user_dict_for_patterns:
+    - "^o.*$"
+    - "^`.*$"
+
+# Lua 配置: 降低部分英语单词在候选项的位置。
+# 详细介绍 https://dvel.me/posts/make-rime-en-better/#短单词置顶的问题
+# 正常情况： 输入 rug 得到 「1.rug 2.如果 …… 」
+# 降低之后： 输入 rug 得到 「1.如果 2.rug …… 」
+# 几种模式：
+# all     降低所有 3~4 位长度、前 2~3 位是完整拼音、最后一位是声母的单词
+# none    不降低任何单词，相当于没有启用这个 Lua
+# custom  自定义，只降低 custom 里的
+# （匹配的是编码，不是单词）
+reduce_english_filter:
+  mode: custom  # all | none | custom
+  idx: 2        # 降低到第 idx 个位置
+  # 自定义的单词列表，示例列表没有降低部分常用单词，如 and cat mail Mac but bad shit ……
+  words: [aid, ann,
+  bail, bait, bam, band, bans, bat, bay, bend, bent, benz, bib, bid, bien, biz, boc, bop, bos, bud, buf,
+  cab, cad, cain, cam, cans, cap, cas, cef, chad, chan, chap, chef, cher, chew, chic, chin, chip, chit, coup, cum, cunt, cur,
+  dab, dag, dal, dam, dent, dew, dial, diet, dim, din, dip, dis, dit, doug, dub, dug, dunn,
+  fab, fax, fob, fog, foul, fur,
+  gag, gail, gain, gal, gam, gaol, ged, gel, ger, guam, gus, gut,
+  hail, ham, hank, hans, hat, hay, heil, heir, hem, hep, hud, hum, hung, hunk, hut,
+  jim, jug,
+  kat,
+  lab, lad, lag, laid, lam, laos, lap, lat, lax, lay, led, leg, lex, liam, lib, lid, lied, lien, lies, linn, lip, lit, liz, lob, lug, lund, lung, lux,
+  mag, maid, mann, mar, mat, med, mel, mend, mens, ment, mil, mins, mint, mob, moc, mod, mop, mos, mot, mud, mug, mum, nail,
+  nap, nat, nay, neil, nib, nip, noun, nous, nun, nut,
+  pac, paid, pail, pain, pair, pak, pal, pam, pans, pant, pap, par, pat, paw, pax, pens, pic, pier, pies, pins, pint, pit, pix, pod, pop, pos, pot, pour, pow, pub,
+  rand, rant, rent, rep, res, ret, rex, rib, rid, rig, rim, rub, rug, rum, runs,
+  sac, sail, sal, sam, sans, sap, saw, sax, sew, sham, shaw, shin, sig, sin, sip, sis, suit, sung, suns, sup, sur, sus,
+  tad, tail, taj, tar, tax, tec, ted, tel, ter, tex, tic, tied, tier, ties, tim, tin, tit, tour, tout, tum,
+  wag, wand, womens, wap, wax, weir, won,
+  yan, yen]
+
+auto_creation:
+  __include: /translator
+  enable_encoder: true
+  enable_user_dict: true
+  encode_commit_history: true  # 开启/关闭自动造词功能：true/false。
+  max_phrase_length: 4
+  initial_quality: -1
+  disable_user_dict_for_patterns:
+    - "^;.*$"
+
+# custom_creation:
+#   __include: /translator
+#   initial_quality: -1
+#   enable_sentence: true #在开启 4 字上屏后，只能造长度为两个字的词
+#   prefix: "'"
+#   tips: "〔手动造词〕"
+#   tag: custom
+
+history:
+  input: ;f
+  size: 1 #重复前几次上屏
+  initial_quality: 1 #首选
+
+# 简繁切换
+traditionalize:
+  option_name: traditionalization
+  opencc_config: s2t.json             # s2t.json | s2hk.json | s2tw.json | s2twp.json
+  tips: none                          # 转换提示: all 都显示 | char 仅单字显示 | none 不显示。
+  excluded_types: [ reverse_lookup ]  # 不转换反查（两分拼字）的内容
+
+melt_eng:
+  dictionary: melt_eng     # 挂载词库 melt_eng.dict.yaml
+  enable_sentence: false   # 禁止造句
+  # enable_completion: false # 禁用补全提示
+  enable_user_dict: false  # 禁用用户词典
+  # prefix: "iw"
+  # spelling_hints: 9
+  initial_quality: -2      # 初始权重
+  comment_format:          # 自定义提示码
+    - xform/^.+//          # 清空提示码
+
+custom_phraseVD:
+  dictionary: ""
+  user_dict: flypy_top
+  db_class: stabledb
+  enable_sentence: false
+  enable_completion: false
+  initial_quality: 0 #用户词和系统词重码 置顶
+
+custom_phraseXT:
+  dictionary: ""
+  user_dict: flypy_sys
+  db_class: stabledb
+  enable_sentence: false
+  enable_completion: false
+  initial_quality: -1 #本表词和系统词重码居后
+
+custom_phraseYH:
+  dictionary: ""
+  user_dict: flypy_user
+  db_class: stabledb
+  enable_sentence: false
+  enable_completion: false
+  initial_quality: -1 #用户词和系统词重码居后
+  
+custom_phraseQMZ:
+  dictionary: ""
+  user_dict: flypy_full
+  db_class: stabledb
+  enable_sentence: false
+  enable_completion: false
+  initial_quality: -1 #和系统词重码时居后
+
+reverse_lookup:
+  dictionary: rev_flypy
+  tips: 〔反查〕
+  comment_format: #候选词编码提示格式
+    # - xform/^/〔/
+    # - xform/$/〕/
+    - xform/ / /
