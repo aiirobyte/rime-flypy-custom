@@ -4,3 +4,4 @@ en_dicts/
 *.userdb/
 sync/
 installation.yaml
+user.yaml
