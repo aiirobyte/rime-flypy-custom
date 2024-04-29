@@ -25,6 +25,9 @@ number_translator = require("number_translator")
 -- 错音错字提示
 corrector = require("corrector")
 
+-- 音形辅助码
+aux_code = require("aux_code")
+
 -- v 模式 symbols 优先（全拼）
 v_filter = require("v_filter")
 
@@ -37,7 +40,8 @@ reduce_english_filter = require("reduce_english_filter")
 -- 取消特定输入码的候选项
 custom_filter = require("custom_filter")
 
-
+-- 放置英文 4 字自动上屏
+auto_four_yield = require("auto_four_yield")
 
 -- 默认未启用：
 

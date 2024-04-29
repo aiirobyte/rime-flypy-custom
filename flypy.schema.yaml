@@ -75,10 +75,12 @@ engine:
   filters:
     - lua_filter@corrector
     - simplifier@traditionalize
+    - lua_filter@aux_code@flypy_full
     - lua_filter@v_filter
     - lua_filter@autocap_filter
     - lua_filter@reduce_english_filter
     - lua_filter@custom_filter
+    # - lua_filter@auto_four_yield
     - uniquifier
 
 speller:
@@ -93,7 +95,7 @@ speller:
   auto_select_unique_candidate: true
   #auto_clear: max_length #manual|auto|max_length 空码按下一键确认清屏|空码自动清|达到最长码时后码顶上清屏
   algebra: # 模糊音，可注释掉不需要的
-    - derive/^z([a-z]{2,})$/v$1/ # z => zh, only fuzzy more than 1
+    - derive/^z([a-z]{2,})$/v$1/ # z => zh, only fuzzy after 1
     - derive/^v([a-z]{2,})$/z$1/ # zh => z
     - derive/^c([a-z]{2,})$/i$1/ # c => ch
     - derive/^i([a-z]{2,})$/c$1/ # ch => c
@@ -149,9 +151,9 @@ reduce_english_filter:
   wag, wand, womens, wap, wax, weir, won,
   yan, yen]
 
-# Lua 配置：自定义特定编码/编码正则匹配去除候选，实现不自动上屏
+# Lua 配置：自定义特定编码/编码正则匹配去除候选，解决部分不常用音形4字自动上屏的不便
 custom_filter:
-  words: [http]
+  words: [http, boar, symb]
 
 auto_creation:
   __include: /translator

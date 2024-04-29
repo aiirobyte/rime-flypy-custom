@@ -81,9 +81,9 @@ punctuator:
     ":" : "："
     "!" : "！"
   symbols:
-  #快捷信息
-    'Sfh': ["……", "——", "《》", "【】", "¥", "・"]
-    'Sxx': ["aiiroanlee@outlook.com", "aiiroanlee@gmail.com", "alan999@foxmail.com", "amna25499@gmail.com", "17278213024", "18130167954"]
+    __include: symbols_private:/symbols
+  #快捷符号
+    'Vfh': ["……", "——", "《》", "【】", "¥", "・"]
   #表情
     'Vbq': [ ☻, ☺, ☹ ]
   #天氣

@@ -24,7 +24,7 @@ function M.func(input, env)
     if M.map[code] then
         for cand in input:iter() do
             -- 可以在这里添加日志或调试代码来确认哪些词被过滤
-            print("Filtered out: " .. code)
+            -- print("Filtered out: " .. code)
         end
     end
 

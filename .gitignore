@@ -3,5 +3,6 @@ cn_dicts/
 en_dicts/
 *.userdb/
 sync/
+symbols_private.yaml
 installation.yaml
 user.yaml

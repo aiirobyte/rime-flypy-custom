@@ -61,22 +61,28 @@ style:
 preset_color_schemes:
   slumbers:
     name: "Slumbers"
-    font_face: "LXGWWenKai-Regular"
+    author: "aiirobyte <aiiroanlee@gmail.com>"
+
+    font_face: "LXGWWenKai-Regular, PingFangSC"
     font_point: 15.0
-    label_font_face: "LXGWWenKai-Light"
+    label_font_face: "LXGWWenKai-Light, PingFangSC"
     label_font_point: 15.0
-    comment_font_face: "LXGWWenKai-Light"
+    comment_font_face: "LXGWWenKai-Light, PingFangSC"
     comment_font_point: 15.0
+
+    # candidate_format: "%c\u2005%@"
     candidate_list_layout: stacked
     text_orientation: horizontal
     inline_preedit: true
-    translucency: true
+
     corner_radius: 5.0
     hilited_corner_radius: 4.0
     border_height: 6.0
     border_width: 10.0
     line_spacing: 10.0
+
     color_space: display_p3
+    translucency: true
     back_color: 0x19DFF1F5
     candidate_text_color: 0x3C3C3C
     comment_text_color: 0x59686F
@@ -91,11 +97,11 @@ preset_color_schemes:
 
   lullabies:
     name: "Lullabies"
-    font_face: "LXGWWenKai-Regular"
+    font_face: "LXGWWenKai-Regular, PingFangSC"
     font_point: 15.0
-    label_font_face: "LXGWWenKai-Light"
+    label_font_face: "LXGWWenKai-Light, PingFangSC"
     label_font_point: 15.0
-    comment_font_face: "LXGWWenKai-Light"
+    comment_font_face: "LXGWWenKai-Light, PingFangSC"
     comment_font_point: 15.0
     candidate_list_layout: stacked
     text_orientation: horizontal
