@@ -3,7 +3,7 @@
 #
 # Usage: patch your Rime schema to enable \X symbols
 
-config_version: '2023-04-28'
+config_version: '2024-04-28'
 
 patch:
   punctuator/import_preset: symbols # import_preset 后面的内容是配置文件
