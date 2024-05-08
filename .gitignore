@@ -1,8 +1,10 @@
-build/
-cn_dicts/
-en_dicts/
-*.userdb/
-sync/
-symbols_private.yaml
+.DS_Store
+
 installation.yaml
 user.yaml
+
+build/
+*.userdb/
+sync/
+
+symbols_private.yaml
