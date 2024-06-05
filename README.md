@@ -1,5 +1,12 @@
-# 配置注意事项
-## LUA
+# 简介
+方案及来源：[小鹤音形](https://flypy.com/) + [雾凇拼音](https://github.com/iDvel/rime-ice) + [melt_eng](https://github.com/tumuyan/rime-melt) 英文输入
+输入功能及来源：
+- [小鹤音形反查](https://github.com/amorphobia/openfly)
+- [小鹤音形辅助码](https://github.com/HowcanoeWang/rime-lua-aux-code)
+- [日期+时间+大写数字+符号输入](https://github.com/iDvel/rime-ice)
+- [自动造词](https://github.com/ryan00zou/rime-xhup)
+## 我的配置摸索
+### LUA
 - 文件/路径
 ./rime.lua LUA总配置路径
 ./lua/name_space.lua LUA执行文件
@@ -14,7 +21,7 @@ engine:
 ```
 name_space = require("file_name")
 ```
-## LINK
+### LINK
 - `import_preset`
 案例：
 ```
